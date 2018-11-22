@@ -66,10 +66,10 @@ This package provides implementations of FALCON convolution/ Mobile convolution 
     ls -l
     ```
 * Pre-trained model is saved in FALCON/src/train_test/trained_model/
-    * Standard model:
-        conv=StandardConv,model=MobileNet,data=cifar100,rank=1,alpha=1.pkl
-    * FALCON model:
-        conv=FALCON,model=MobileNet,data=cifar100,rank=1,alpha=1.pkl
+    * Standard model: (It is about 115M. You have to train it first, since trained model is too large to upload.)
+        `conv=StandardConv,model=MobileNet,data=cifar100,rank=1,alpha=1.pkl`
+    * FALCON model: (It is trained and saved in folder.)
+        `conv=FALCON,model=MobileNet,data=cifar100,rank=1,alpha=1.pkl`
 ####  Scripts
 * There are four demo scripts: `scripts/train.sh`, `scripts/train_rank.sh`, `scripts/test.sh`, `scripts/test_rank.sh`
 * You can change arguments in `.sh` files to train/test different model.
@@ -81,7 +81,7 @@ This package provides implementations of FALCON convolution/ Mobile convolution 
         * Training procedure and result will be print on the screen.
     * `test.sh`: Execute test of trained model (-conv FALCON -m MobileNet -data cifar100)
         * Accuracy/ inference time/ compression rate/ computation reduction rate will be print on the screen.
-    * `test_rank.sh`: Execute test of trained model (-conv FALCON -m MobileNet -data cifar100 -k 2 -al 0.5)
+    * `test_rank.sh`: Execute test of trained model (-conv FALCON -m MobileNet -data cifar100 -k 2 -al 0.9)
         * Accuracy/ inference time/ compression rate/ computation reduction rate will be print on the screen.
 
 ## Contact us
