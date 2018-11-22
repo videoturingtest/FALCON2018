@@ -1,0 +1,88 @@
+"""
+FALCON: FAst and Lightweight CONvolution
+
+Authors:
+ - Chun Quan (quanchun@snu.ac.kr)
+ - U Kang (ukang@snu.ac.kr)
+ - Data Mining Lab. at Seoul National University.
+
+File: model/simplenet_FALCON.py
+ - Contain FALCON class and a simple-net with FALCON class.
+
+Version: 1.0
+
+This software is free of charge under research purposes.
+For commercial purposes, please contact the authors.
+
+"""
+
+import torch.nn as nn
+
+
+class BlockOutputEHP(nn.Module):
+    """
+    Description: Mobile-FALCON class.
+    """
+    def __init__(self, in_planes, out_planes, stride=1):
+        """
+        Initialize Mobile-conv as argument configurations.
+        :param in_planes: number of input channel
+        :param out_planes: number of output channle
+        :param stride: stride size
+        """
+
+        super(BlockOutputEHP, self).__init__()
+
+        # FALCON - no BN & ReLu between pw and dw performs better
+        self.Block = nn.Sequential(
+            # pointwise layer
+            nn.Conv2d(in_planes, out_planes, kernel_size=1, stride=1, padding=0),
+            # depthwise layer
+            nn.Conv2d(out_planes, out_planes, kernel_size=3, stride=stride, padding=1, groups=out_planes),
+            nn.BatchNorm2d(out_planes),
+            nn.ReLU(True)
+        )
+
+    def forward(self, x):
+        return self.Block(x)
+
+
+class SimpleNetOutputEHP(nn.Module):
+    """
+    Description: SimpleNet (with FALCON) class.
+    """
+    def __init__(self, num_classes=10):
+        """
+        Initialize SimpleNet with FALCON as argument configurations.
+        :param num_classes: number of classification labels
+        """
+        super(SimpleNetOutputEHP, self).__init__()
+
+        # standard conv layer replaced by FALCON
+        self.conv1 = BlockOutputEHP(3, 64, 2)
+        self.conv2 = BlockOutputEHP(64, 64, 2)
+
+        # fc layer remains unchanged
+        self.fc1 = nn.Sequential(
+            nn.Linear(8 * 8 * 64, 384),
+            nn.ReLU(True),
+        )
+
+        self.fc2 = nn.Sequential(
+            nn.Linear(384, 192),
+            nn.ReLU(True),
+        )
+
+        self.fc3 = nn.Sequential(
+            nn.Linear(192, num_classes),
+            nn.Softmax()
+        )
+
+    def forward(self, x):
+        out = self.conv1(x)
+        out = self.conv2(out)
+        out = out.view(out.size(0), -1)
+        out = self.fc1(out)
+        out = self.fc2(out)
+        out = self.fc3(out)
+        return out
