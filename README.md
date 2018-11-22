@@ -27,8 +27,8 @@ This package provides implementations of FALCON convolution/ Mobile convolution 
 * Note that: The datasets depends on torchvision (https://pytorch.org/docs/stable/torchvision/datasets.html#cifar). You don't have to download anything. When execute the source code, the datasets will be automaticly download if it is not detected.
 
 #### Output
-* After training, the trained model will be saved in `train_test/trained_model/`.
-* `You can test the model only if there is a trained model in train_test/trained_model/.`
+* After training, the trained model will be saved in `src/train_test/trained_model/`.
+* `You can test the model only if there is a trained model in src/train_test/trained_model/.`
 
 ## Install
 #### Environment 
@@ -42,7 +42,7 @@ This package provides implementations of FALCON convolution/ Mobile convolution 
 
 ## How to use 
 #### Clone the repository
-    git clone https://
+    git clone https://github.com/quanchun/FALCON
     cd FALCON
 #### DEMO
 * To train the model, run script:
