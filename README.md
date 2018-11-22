@@ -6,7 +6,7 @@ FALCON, a faster and lighter convolution, is capable of compressing and accelera
 FALCON compresses and accelerates MobileNet with standard convolution for 7.4× and 2.36×, respectively.  
 
 ## Overview
-#### Code structure
+### Code structure
 * `./src`: source code for FALCON
     * `./src/model`: python scripts for model definition
 
@@ -16,37 +16,37 @@ FALCON compresses and accelerates MobileNet with standard convolution for 7.4× 
 
 * `./scripts`: shell scripts for execution of training/testing codes in `./main`
 
-#### Naming convention
+### Naming convention
 **FALCON**: FAst and Lightweight CONvolution - the new convolution architecture we proposed
 
 **MobileConv**: Convolution architecture from paper 'MobileNet' (refer to https://arxiv.org/abs/1704.04861)
 
 **Rank**: Rank of convolution. Copy the conv layer for n times, run independently and add output together at the end of the layer. This hyper-parameter helps balace compression rate/ accelerate rate and accuracy.
 
-#### Data description
+### Data description
 * CIFAR-10 datasets
 * CIFAR-100 datasets
 * Note that: The datasets depends on torchvision (https://pytorch.org/docs/stable/torchvision/datasets.html#cifar). You don't have to download anything. When execute the source code, the datasets will be automaticly download if it is not detected.
 
-#### Output
+### Output
 * After training, the trained model will be saved in `src/train_test/trained_model/`.
 * `You can test the model only if there is a trained model in src/train_test/trained_model/.`
 
 ## Install
-#### Environment 
+### Environment 
 * Unbuntu
 * CUDA 9.0
 * Python 3.6
 * torch
 * torchvision
-#### Dependence Install
+### Dependence Install
     pip3 install torch torchvision
 
 ## How to use 
-#### Clone the repository
+### Clone the repository
     git clone https://github.com/quanchun/FALCON
     cd FALCON
-#### DEMO
+### DEMO
 * To train the model, run script:
     ```    
     cd scr/train_test
@@ -72,7 +72,7 @@ FALCON compresses and accelerates MobileNet with standard convolution for 7.4× 
         `conv=StandardConv,model=MobileNet,data=cifar100,rank=1,alpha=1.pkl`
     * FALCON model: (It is trained and saved in folder.)
         `conv=FALCON,model=MobileNet,data=cifar100,rank=1,alpha=1.pkl`
-####  Scripts
+###  Scripts
 * There are four demo scripts: `scripts/train.sh`, `scripts/train_rank.sh`, `scripts/test.sh`, `scripts/test_rank.sh`
 * You can change arguments in `.sh` files to train/test different model.
     * `train.sh`: Execute training of model (-conv FALCON -m VGG16 -data cifar10)
