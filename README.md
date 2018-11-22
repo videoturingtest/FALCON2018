@@ -1,7 +1,9 @@
 FALCON: FAst and Lightweight CONvolution
 ===
 
-This package provides implementations of FALCON convolution/ Mobile convolution and their corresponding CNN model.
+This repositary provides implementations of FALCON convolution / Mobile convolution and their corresponding CNN model.
+FALCON, a faster and lighter convolution, is capable of compressing and accelerateing standard convolution. 
+FALCON compress and accelerate MobileNet with standard convolution for 7.4× and 2.36×, respectively.
 
 ## Overview
 #### Code structure
